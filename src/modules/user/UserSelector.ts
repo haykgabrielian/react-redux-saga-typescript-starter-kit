@@ -4,32 +4,14 @@ import {createSelector} from "helpers/DataHelper";
 
 const userDataSelector: any = state => state.get("userData");
 
-const successMessageSelector: any = createSelector(
-    userDataSelector, (userData: any) => userData.successMessage
-);
-
-const errorMessageSelector: any = createSelector(
-    userDataSelector, (userData: any) => userData.errorMessage
-);
-
-const userProfileSelector: any = createSelector(
-    userDataSelector, (userData: any) => userData.userProfile
-);
-
-const isSuperAdminSelector: any = createSelector(
-    userDataSelector, (userData: any) => userData.isSuper
+const successUserNameSelector: any = createSelector(
+    userDataSelector, (userData: any) => userData.userName
 );
 
 export interface IUserModuleProps {
-    successMessage?: string;
-    errorMessage?: string;
-    userProfile?: any;
-    isSuper?: boolean
+    userName?: string;
 }
 
 export default (state) => ({
-    successMessage: successMessageSelector(state),
-    errorMessage: errorMessageSelector(state),
-    userProfile: userProfileSelector(state),
-    isSuper: isSuperAdminSelector(state)
+    userName: successUserNameSelector(state),
 });

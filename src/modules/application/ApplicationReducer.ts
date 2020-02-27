@@ -13,21 +13,11 @@ export const actions: IApplicationReducerActions = {
 };
 
 export interface IApplicationData {
-    countries?: any[],
-    currencies?: any[],
-    regionCodes?: any[],
-    platforms?: any[],
     languages?: any[],
-    callsMetricTypes?: any[]
 }
 
 export const defaultState: IApplicationData = ({
-    countries: [],
-    currencies: [],
-    regionCodes: [],
-    platforms: [],
     languages: [],
-    callsMetricTypes: [],
 });
 
 export default (state: IApplicationData = defaultState, {type, payload}: IApplicationActions): IApplicationData => {

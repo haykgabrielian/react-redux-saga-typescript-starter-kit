@@ -5,10 +5,11 @@ import styled from "styled-components";
 import {connect} from "react-redux";
 import selector, {IStoreProps} from "services/selector";
 
-import {getStaticData} from "modules/application/ApplicationActions";
+import {attemptLogIn} from "modules/user/UserActions";
 
 interface IHomePageProps extends IStoreProps {
-    getStaticData: () => void,
+    attemptLogIn: (userName: string) => void,
+    userName: string,
 }
 
 const Container: any = styled.div`
@@ -33,7 +34,7 @@ class HomePage extends React.PureComponent<IHomePageProps> {
     };
 
     handleButtonClick = () => {
-        this.props.getStaticData();
+        this.props.attemptLogIn("saga button");
     };
 
     render(): JSX.Element {
@@ -44,7 +45,7 @@ class HomePage extends React.PureComponent<IHomePageProps> {
                     Home Page
                 </Text>
                 <StyledButton onClick={this.handleButtonClick}>
-                    Test Button
+                    {this.props.userName}
                 </StyledButton>
             </Container>
         );
@@ -54,7 +55,7 @@ class HomePage extends React.PureComponent<IHomePageProps> {
 const mapStateToProps: any = state => selector(state);
 
 const mapDispatchToProps: any = dispatch => ({
-    getStaticData: () => dispatch(getStaticData()),
+    attemptLogIn: (userName: string) => dispatch(attemptLogIn(userName)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
