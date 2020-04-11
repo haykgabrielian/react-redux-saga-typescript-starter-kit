@@ -1,32 +1,25 @@
 "use strict";
 
 import * as React from "react"
-import Loadable from "react-loadable";
 import {Route, Switch} from "react-router-dom";
 
 import {ROUTER_CONFIG} from "configs/routerConfig";
 
-const virtualRouter: any = {
+import HomePage from "containers/pages/home";
+import About from "containers/pages/about";
+
+const router: any = {
     root: {
         path: "/",
-        component: Loadable({
-            loader: () => import("containers/pages/home"),
-            loading: () => <span>Loading...</span>,
-        }),
+        component: HomePage
     },
     about: {
         path: "/about",
-        component: Loadable({
-            loader: () => import("containers/pages/about"),
-            loading: () => <span>Loading...</span>,
-        }),
+        component: About
     },
     init: {
         path: "*",
-        component: Loadable({
-            loader: () => import("containers/pages/pageNotFound"),
-            loading: () => <span>Loading...</span>,
-        }),
+        component: HomePage
     },
 };
 
@@ -35,10 +28,10 @@ const publicPages: any = (component: any, props?: any): any => {
 };
 
 const routerInstance: any = [];
-for (const item in virtualRouter) {
-    if (virtualRouter.hasOwnProperty(item)) {
-        const path: string = virtualRouter[item].path;
-        const component: any = virtualRouter[item].component || null;
+for (const item in router) {
+    if (router.hasOwnProperty(item)) {
+        const path: string = router[item].path;
+        const component: any = router[item].component || null;
         const handleRender: any = (props: any): void => {
             return publicPages.call(null, component, props);
         };
